@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ShipOnline.ViewModels
+namespace ShipOnline.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
