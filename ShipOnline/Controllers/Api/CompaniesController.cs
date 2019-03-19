@@ -19,10 +19,10 @@ namespace ShipOnline.Controllers.Api
 
         // Using Data Transfer Object
 
-        //public CompaniesController()
-        //{
-        //    _unitOfWork = new UnitOfWork(new ShipBaseDbContext());
-        //}
+        public CompaniesController()
+        {
+            _unitOfWork = new UnitOfWork(new ShipBaseDbContext());
+        }
         public CompaniesController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -49,17 +49,17 @@ namespace ShipOnline.Controllers.Api
 
         // POST /api/companies
         [HttpPost]
-        public CompanyDto CreateCompany(CompanyDto companyDto)
+        public IHttpActionResult CreateCompany(CompanyDto companyDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+               return BadRequest();
 
             var company = Mapper.Map<CompanyDto, Company>(companyDto);
             _unitOfWork.Companies.Add(company);
             _unitOfWork.Complete();
 
             companyDto.ID = company.ID;
-            return companyDto;
+            return Created(new Uri(Request.RequestUri + "/" + company.ID), companyDto);
         }
 
         // PUT /api/companies/1
