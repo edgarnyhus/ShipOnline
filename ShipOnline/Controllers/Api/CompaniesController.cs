@@ -38,7 +38,7 @@ namespace ShipOnline.Controllers.Api
 
         // Return Data Transfer Object
         [HttpGet]
-        public CompanyDto GetCompanyDto(string id)
+        public CompanyDto GetCompany(string id)
         {
             var company = _unitOfWork.Companies.SingleOrDefault(c => c.ID == id);
             if (company == null)
